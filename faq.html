@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Modesta</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* FAQ Page Specific Styles */
+        .page-title {
+            background-color: var(--color-ivory);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .breadcrumb {
+            color: var(--color-dark-gray);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-teal);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        
+        .faq-section {
+            padding: 5rem 0;
+        }
+        
+        .faq-intro {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+        
+        .faq-intro p {
+            color: var(--color-dark-gray);
+            line-height: 1.8;
+        }
+        
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 10px 20px;
+            background-color: var(--color-light-gray);
+            border: none;
+            border-radius: 4px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: var(--color-teal);
+            color: var(--color-white);
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-category {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-medium-gray);
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--color-medium-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background-color: var(--color-white);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background-color: var(--color-ivory);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            color: var(--color-dark-gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-cta {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 3rem;
+            background-color: var(--color-ivory);
+            border-radius: 8px;
+        }
+        
+        .contact-cta h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta p {
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-question {
+                padding: 1.2rem;
+                font-size: 0.95rem;
+            }
+            
+            .category-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p>Enjoy free delivery on all orders over $50!</p>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html" class="active">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Modesta</h1>
+                </a>
+            </div>
+            <div class="header-icons">
+                <a href="#" class="icon-link"><i class="fas fa-search"></i></a>
+                <a href="#" class="icon-link"><i class="fas fa-user"></i></a>
+                <a href="#" class="icon-link"><i class="fas fa-heart"></i><span class="count">0</span></a>
+                <a href="#" class="icon-link"><i class="fas fa-shopping-bag"></i><span class="count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / FAQ
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-intro">
+                <p>We've compiled answers to the questions we get asked the most about our products, ordering process, shipping, and more. If you can't find what you're looking for, please don't hesitate to contact our customer service team.</p>
+            </div>
+            
+            <div class="faq-categories">
+                <button class="category-btn active" data-category="all">All Questions</button>
+                <button class="category-btn" data-category="orders">Orders & Payment</button>
+                <button class="category-btn" data-category="shipping">Shipping & Delivery</button>
+                <button class="category-btn" data-category="returns">Returns & Exchanges</button>
+                <button class="category-btn" data-category="products">Products & Sizing</button>
+            </div>
+            
+            <div class="faq-container">
+                <!-- Orders & Payment -->
+                <div class="faq-category" id="orders">
+                    <h2 class="category-title">Orders & Payment</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I place an order?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Placing an order on our website is simple. Browse our collections, select the items you wish to purchase, choose your size and color options, and add them to your cart. When you're ready to checkout, click on the shopping bag icon in the top right corner of the page.</p>
+                            <p>Follow the checkout process by entering your shipping information, selecting your preferred shipping method, and completing payment. You'll receive an order confirmation email once your purchase is complete.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What payment methods do you accept?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We accept the following payment methods:</p>
+                            <p>- Credit/debit cards (Visa, Mastercard, American Express)<br>
+                            - PayPal<br>
+                            - Apple Pay<br>
+                            - Google Pay<br>
+                            - Cash on Delivery (available in select regions)</p>
+                            <p>All transactions are secured with industry-standard encryption to ensure your payment information remains safe.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Can I modify or cancel my order after it's been placed?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We process orders quickly to ensure fast delivery. If you need to modify or cancel your order, please contact our customer service team immediately at support@modesta.com or call +1 (555) 123-4567.</p>
+                            <p>We can usually accommodate changes if the order hasn't been processed yet. Once an order has been shipped, it cannot be modified or canceled, but you can return it according to our return policy once received.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Shipping & Delivery -->
+                <div class="faq-category" id="shipping">
+                    <h2 class="category-title">Shipping & Delivery</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How long will it take to receive my order?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Delivery times vary depending on your location and the shipping method selected:</p>
+                            <p>- Standard Shipping: 5-7 business days (free on orders over $50)<br>
+                            - Express Shipping: 2-3 business days<br>
+                            - Next Day Delivery: 1 business day (order must be placed before 12pm EST)</p>
+                            <p>International shipping typically takes 7-14 business days, depending on the destination country and customs processing times.</p>
+                            <p>You'll receive a tracking number via email once your order ships, allowing you to monitor its progress.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Do you ship internationally?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we ship to most countries worldwide. International shipping rates and delivery times vary by location. Any applicable customs fees, duties, or taxes are the responsibility of the customer and are not included in our shipping charges.</p>
+                            <p>During checkout, you can see the shipping options and costs available for your country before completing your purchase.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How can I track my order?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Once your order ships, you'll receive a shipping confirmation email containing your tracking number and a link to track your package. You can also track your order by logging into your account on our website and viewing your order history.</p>
+                            <p>If you haven't received a tracking number within 48 hours of your order confirmation (excluding weekends and holidays), please contact our customer service team.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Returns & Exchanges -->
+                <div class="faq-category" id="returns">
+                    <h2 class="category-title">Returns & Exchanges</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What is your return policy?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer a 30-day return policy for all unworn, unwashed items in their original condition with tags attached. To initiate a return, please visit the Returns page in your account or contact our customer service team.</p>
+                            <p>Sale items and accessories (such as hijab pins, jewelry, etc.) are final sale and cannot be returned unless defective.</p>
+                            <p>Return shipping costs are the responsibility of the customer unless the item received was defective or incorrect.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I exchange an item for a different size or color?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>For exchanges, we recommend placing a new order for the desired item to ensure availability, then returning the original item for a refund following our standard return process.</p>
+                            <p>If you prefer a direct exchange, please contact our customer service team with your order number and the details of the item you'd like to exchange. Please note that direct exchanges may take longer to process and are subject to item availability.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How long does it take to process a return?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Once we receive your return, it typically takes 3-5 business days to inspect and process. Refunds are issued to the original payment method and may take an additional 3-7 business days to appear on your statement, depending on your financial institution.</p>
+                            <p>You'll receive an email confirmation when your return has been processed and the refund has been issued.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Products & Sizing -->
+                <div class="faq-category" id="products">
+                    <h2 class="category-title">Products & Sizing</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How do I find my correct size?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We provide detailed size guides for all our products. To find your perfect fit, take your measurements and refer to the size chart on each product page. If you're between sizes, we generally recommend sizing up for a more comfortable fit.</p>
+                            <p>Our size range typically includes XS to XXL, with specific measurements provided for each size. If you need assistance with sizing, please contact our customer service team who can provide personalized recommendations based on your measurements.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What materials do you use in your clothing?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We use a variety of high-quality, comfortable fabrics in our collections. Common materials include:</p>
+                            <p>- Premium cotton and cotton blends<br>
+                            - Sustainable viscose and modal<br>
+                            - Breathable linen and linen blends<br>
+                            - Soft, drapey crepe<br>
+                            - Lightweight chiffon for layering pieces</p>
+                            <p>Specific material information is listed on each product page. We prioritize fabrics that are both comfortable for all-day wear and maintain modesty standards.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How should I care for my Modesta garments?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Care instructions vary by garment and fabric type. Detailed care information is provided on the product page and on the care label of each item. Generally, we recommend:</p>
+                            <p>- Machine wash cold on gentle cycle or hand wash<br>
+                            - Use mild detergent<br>
+                            - Avoid bleach and harsh chemicals<br>
+                            - Hang or lay flat to dry<br>
+                            - Iron on low heat if needed</p>
+                            <p>Following the specific care instructions for each garment will help maintain its quality and extend its lifespan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-cta">
+                <h3>Couldn't Find Your Answer?</h3>
+                <p>Our customer service team is here to help with any questions you may have. Feel free to reach out to us via email, phone, or WhatsApp.</p>
+                <a href="contact.html" class="btn primary-btn">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Be the first to know about new collections, special offers, and styling tips</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Modesta</h3>
+                <p>Modesta is a premium modest fashion brand dedicated to creating elegant, contemporary clothing that respects traditional values while embracing modern style.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="shop.html">Shop All</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Sale Items</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@modesta.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fab fa-whatsapp"></i> WhatsApp: +1 (555) 987-6543</li>
+                </ul>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Modesta. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ Accordion Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Toggle active class on clicked item
+                    item.classList.toggle('active');
+                    
+                    // Close other items (optional, for accordion behavior)
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Category filtering
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const faqCategories = document.querySelectorAll('.faq-category');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const category = button.getAttribute('data-category');
+                    
+                    // Show/hide categories based on selection
+                    if (category === 'all') {
+                        faqCategories.forEach(cat => cat.style.display = 'block');
+                    } else {
+                        faqCategories.forEach(cat => {
+                            if (cat.id === category) {
+                                cat.style.display = 'block';
+                            } else {
+                                cat.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

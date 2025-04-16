@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Modesta</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Blog Page Specific Styles */
+        .page-title {
+            background-color: var(--color-ivory);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .breadcrumb {
+            color: var(--color-dark-gray);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-teal);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        
+        .blog-section {
+            padding: 5rem 0;
+        }
+        
+        .blog-container {
+            display: flex;
+            gap: 3rem;
+        }
+        
+        .blog-main {
+            flex: 3;
+        }
+        
+        .blog-sidebar {
+            flex: 1;
+        }
+        
+        .featured-post {
+            margin-bottom: 4rem;
+        }
+        
+        .featured-post-image {
+            height: 500px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .featured-post-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .post-category {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--color-teal);
+            color: var(--color-white);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .post-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        .post-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .post-excerpt {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--color-dark-gray);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+        
+        .blog-card {
+            margin-bottom: 2rem;
+        }
+        
+        .blog-card-image {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .blog-card .post-title {
+            font-size: 1.5rem;
+        }
+        
+        .blog-card .post-excerpt {
+            margin-bottom: 1rem;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 3rem;
+        }
+        
+        .sidebar-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .sidebar-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--color-teal);
+        }
+        
+        .search-form {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .search-form input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--color-medium-gray);
+            border-radius: 4px 0 0 4px;
+            font-family: inherit;
+        }
+        
+        .search-form button {
+            padding: 10px 15px;
+            background-color: var(--color-teal);
+            color: var(--color-white);
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            color: var(--color-charcoal);
+            transition: color 0.3s ease;
+        }
+        
+        .category-list a:hover {
+            color: var(--color-teal);
+        }
+        
+        .category-count {
+            background-color: var(--color-light-gray);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .recent-post {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .recent-post-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .recent-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .recent-post-content h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .recent-post-date {
+            font-size: 0.8rem;
+            color: var(--color-dark-gray);
+        }
+        
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            padding: 5px 10px;
+            background-color: var(--color-light-gray);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background-color: var(--color-teal);
+            color: var(--color-white);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 4rem;
+            gap: 0.5rem;
+        }
+        
+        .pagination-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-medium-gray);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination-item:hover,
+        .pagination-item.active {
+            background-color: var(--color-teal);
+            color: var(--color-white);
+            border-color: var(--color-teal);
+        }
+        
+        @media (max-width: 992px) {
+            .blog-container {
+                flex-direction: column;
+            }
+            
+            .blog-sidebar {
+                order: -1;
+            }
+            
+            .sidebar-section {
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-post-image {
+                height: 350px;
+            }
+            
+            .post-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p>Enjoy free delivery on all orders over $50!</p>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Modesta</h1>
+                </a>
+            </div>
+            <div class="header-icons">
+                <a href="#" class="icon-link"><i class="fas fa-search"></i></a>
+                <a href="#" class="icon-link"><i class="fas fa-user"></i></a>
+                <a href="#" class="icon-link"><i class="fas fa-heart"></i><span class="count">0</span></a>
+                <a href="#" class="icon-link"><i class="fas fa-shopping-bag"></i><span class="count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Modest Fashion Blog</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Blog
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-container">
+                <main class="blog-main">
+                    <!-- Featured Post -->
+                    <article class="featured-post">
+                        <div class="featured-post-image">
+                            <img src="images/blog-featured.jpg" alt="5 Ways to Style Your Abaya for Different Occasions">
+                        </div>
+                        <span class="post-category">Styling Tips</span>
+                        <h2 class="post-title">5 Ways to Style Your Abaya for Different Occasions</h2>
+                        <div class="post-meta">
+                            <div class="post-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>April 10, 2025</span>
+                            </div>
+                            <div class="post-meta-item">
+                                <i class="far fa-user"></i>
+                                <span>By Sarah Ahmed</span>
+                            </div>
+                            <div class="post-meta-item">
+                                <i class="far fa-comment"></i>
+                                <span>12 Comments</span>
+                            </div>
+                        </div>
+                        <p class="post-excerpt">The versatile abaya is a cornerstone of modest fashion, but many don't realize its styling potential beyond the basics. In this guide, we explore five distinct ways to transform your abaya from everyday casual to special occasion elegance, proving that modesty never means sacrificing style.</p>
+                        <a href="#" class="btn outline-btn">Read More</a>
+                    </article>
+                    
+                    <!-- Blog Grid -->
+                    <div class="blog-grid">
+                        <!-- Blog Post 1 -->
+                        <article class="blog-card">
+                            <div class="blog-card-image">
+                                <img src="images/blog-1.jpg" alt="Sustainable Modest Fashion: Brands Making a Difference">
+                            </div>
+                            <span class="post-category">Sustainability</span>
+                            <h3 class="post-title">Sustainable Modest Fashion: Brands Making a Difference</h3>
+                            <div class="post-meta">
+                                <div class="post-meta-item">
+                                    <i class="far fa-calendar"></i>
+                                    <span>April 5, 2025</span>
+                                </div>
+                                <div class="post-meta-item">
+                                    <i class="far fa-user"></i>
+                                    <span>By Leila Patel</span>
+                                </div>
+                            </div>
+                            <p class="post-excerpt">Discover how ethical production and sustainable materials are transforming the modest fashion landscape, with spotlight features on brands leading the eco-conscious movement.</p>
+                            <a href="#" class="btn outline-btn">Read More</a>
+                        </article>
+                        
+                        <!-- Blog Post 2 -->
+                        <article class="blog-card">
+                            <div class="blog-card-image">
+                                <img src="images/blog-2.jpg" alt="The History of Modest Fashion: A Cultural Journey">
+                            </div>
+                            <span class="post-category">Culture</span>
+                            <h3 class="post-title">The History of Modest Fashion: A Cultural Journey</h3>
+                            <div class="post-meta">
+                                <div class="post-meta-item">
+                                    <i class="far fa-calendar"></i>
+                                    <span>March 28, 2025</span>
+                                </div>
+                                <div class="post-meta-item">
+                                    <i class="far fa-user"></i>
+                                    <span>By Maya Wilson</span>
+                                </div>
+                            </div>
+                            <p class="post-excerpt">Explore the rich historical tapestry of modest fashion across different cultures and eras, and how traditional elements continue to influence contemporary modest wear.</p>
+                            <a href="#" class="btn outline-btn">Read More</a>
+                        </article>
+                        
+                        <!-- Blog Post 3 -->
+                        <article class="blog-card">
+                            <div class="blog-card-image">
+                                <img src="images/blog-3.jpg" alt="Modest Workwear: Professional Style Without Compromise">
+                            </div>
+                            <span class="post-category">Styling Tips</span>
+                            <h3 class="post-title">Modest Workwear: Professional Style Without Compromise</h3>
+                            <div class="post-meta">
+                                <div class="post-meta-item">
+                                    <i class="far fa-calendar"></i>
+                                    <span>March 20, 2025</span>
+                                </div>
+                                <div class="post-meta-item">
+                                    <i class="far fa-user"></i>
+                                    <span>By Sarah Ahmed</span>
+                                </div>
+                            </div>
+                            <p class="post-excerpt">Navigate the corporate world with confidence through our curated guide to building a modest workwear wardrobe that's both professional and true to your values.</p>
+                            <a href="#" class="btn outline-btn">Read More</a>
+                        </article>
+                        
+                        <!-- Blog Post 4 -->
+                        <article class="blog-card">
+                            <div class="blog-card-image">
+                                <img src="images/blog-4.jpg" alt="Seasonal Color Trends for Modest Fashion">
+                            </div>
+                            <span class="post-category">Trends</span>
+                            <h3 class="post-title">Seasonal Color Trends for Modest Fashion</h3>
+                            <div class="post-meta">
+                                <div class="post-meta-item">
+                                    <i class="far fa-calendar"></i>
+                                    <span>March 15, 2025</span>
+                                </div>
+                                <div class="post-meta-item">
+                                    <i class="far fa-user"></i>
+                                    <span>By Leila Patel</span>
+                                </div>
+                            </div>
+                            <p class="post-excerpt">Stay ahead of the curve with our seasonal color forecast, featuring the palette that's defining modest fashion this season and tips for incorporating these hues into your wardrobe.</p>
+                            <a href="#" class="btn outline-btn">Read More</a>
+                        </article>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <div class="pagination-item active">1</div>
+                        <div class="pagination-item">2</div>
+                        <div class="pagination-item">3</div>
+                        <div class="pagination-item">4</div>
+                        <div class="pagination-item"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </main>
+                
+                <aside class="blog-sidebar">
+                    <!-- Search Section -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Search</h3>
+                        <form class="search-form">
+                            <input type="text" placeholder="Search articles...">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    
+                    <!-- Categories Section -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Categories</h3>
+                        <ul class="category-list">
+                            <li><a href="#">Styling Tips <span class="category-count">12</span></a></li>
+                            <li><a href="#">Modest Fashion Trends <span class="category-count">8</span></a></li>
+                            <li><a href="#">Sustainability <span class="category-count">5</span></a></li>
+                            <li><a href="#">Cultural Insights <span class="category-count">7</span></a></li>
+                            <li><a href="#">Behind the Designs <span class="category-count">4</span></a></li>
+                            <li><a href="#">Modest Living <span class="category-count">6</span></a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Recent Posts Section -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Recent Posts</h3>
+                        <div class="recent-posts">
+                            <div class="recent-post">
+                                <div class="recent-post-image">
+                                    <img src="images/recent-1.jpg" alt="Summer Layering: Staying Modest in the Heat">
+                                </div>
+                                <div class="recent-post-content">
+                                    <h4><a href="#">Summer Layering: Staying Modest in the Heat</a></h4>
+                                    <div class="recent-post-date">April 2, 2025</div>
+                                </div>
+                            </div>
+                            
+                            <div class="recent-post">
+                                <div class="recent-post-image">
+                                    <img src="images/recent-2.jpg" alt="Modest Fashion Week Highlights">
+                                </div>
+                                <div class="recent-post-content">
+                                    <h4><a href="#">Modest Fashion Week Highlights</a></h4>
+                                    <div class="recent-post-date">March 25, 2025</div>
+                                </div>
+                            </div>
+                            
+                            <div class="recent-post">
+                                <div class="recent-post-image">
+                                    <img src="images/recent-3.jpg" alt="Accessorizing Your Hijab: A Complete Guide">
+                                </div>
+                                <div class="recent-post-content">
+                                    <h4><a href="#">Accessorizing Your Hijab: A Complete Guide</a></h4>
+                                    <div class="recent-post-date">March 18, 2025</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tags Section -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Tags</h3>
+                        <div class="tag-cloud">
+                            <a href="#" class="tag">Modest Fashion</a>
+                            <a href="#" class="tag">Styling</a>
+                            <a href="#" class="tag">Abayas</a>
+                            <a href="#" class="tag">Hijab</a>
+                            <a href="#" class="tag">Sustainability</a>
+                            <a href="#" class="tag">Workwear</a>
+                            <a href="#" class="tag">Trends</a>
+                            <a href="#" class="tag">Layering</a>
+                            <a href="#" class="tag">Accessories</a>
+                            <a href="#" class="tag">Modest Living</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Newsletter Section -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">Newsletter</h3>
+                        <p>Subscribe to our blog newsletter for the latest articles and updates.</p>
+                        <form class="newsletter-form" style="flex-direction: column; margin-top: 1rem;">
+                            <input type="email" placeholder="Your email address" required style="border-radius: 4px; margin-bottom: 0.5rem;">
+                            <button type="submit" class="btn primary-btn" style="border-radius: 4px;">Subscribe</button>
+                        </form>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Be the first to know about new collections, special offers, and styling tips</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Modesta</h3>
+                <p>Modesta is a premium modest fashion brand dedicated to creating elegant, contemporary clothing that respects traditional values while embracing modern style.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="shop.html">Shop All</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Sale Items</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@modesta.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fab fa-whatsapp"></i> WhatsApp: +1 (555) 987-6543</li>
+                </ul>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Modesta. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Blog Pagination
+        document.addEventListener('DOMContentLoaded', function() {
+            const paginationItems = document.querySelectorAll('.pagination-item');
+            
+            paginationItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    paginationItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // In a real implementation, this would load the next page of blog posts
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Search Form
+            const searchForm = document.querySelector('.search-form');
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const searchInput = this.querySelector('input');
+                    
+                    if (searchInput && searchInput.value) {
+                        // In a real implementation, this would search for blog posts
+                        alert(`Searching for: ${searchInput.value}`);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Modesta</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Shop Page Specific Styles */
+        .shop-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+            gap: 2rem;
+        }
+        
+        .shop-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+        
+        .shop-main {
+            flex-grow: 1;
+        }
+        
+        .filter-section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--color-medium-gray);
+            padding-bottom: 1.5rem;
+        }
+        
+        .filter-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .filter-options label {
+            display: block;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .filter-options input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        
+        .price-range {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .price-range input {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid var(--color-medium-gray);
+            border-radius: 4px;
+        }
+        
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .shop-title h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .shop-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .sort-select {
+            padding: 8px 12px;
+            border: 1px solid var(--color-medium-gray);
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .view-options {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .view-option {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-medium-gray);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .view-option:hover,
+        .view-option.active {
+            background-color: var(--color-teal);
+            color: var(--color-white);
+            border-color: var(--color-teal);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            gap: 0.5rem;
+        }
+        
+        .pagination-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-medium-gray);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination-item:hover,
+        .pagination-item.active {
+            background-color: var(--color-teal);
+            color: var(--color-white);
+            border-color: var(--color-teal);
+        }
+        
+        .filter-toggle {
+            display: none;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 992px) {
+            .shop-container {
+                flex-direction: column;
+            }
+            
+            .shop-sidebar {
+                width: 100%;
+                display: none;
+            }
+            
+            .shop-sidebar.active {
+                display: block;
+            }
+            
+            .filter-toggle {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 10px 15px;
+                background-color: var(--color-teal);
+                color: var(--color-white);
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-family: inherit;
+                font-weight: 500;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .shop-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .shop-controls {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            
+            .sort-select {
+                flex-grow: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p>Enjoy free delivery on all orders over $50!</p>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html" class="active">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Modesta</h1>
+                </a>
+            </div>
+            <div class="header-icons">
+                <a href="#" class="icon-link"><i class="fas fa-search"></i></a>
+                <a href="#" class="icon-link"><i class="fas fa-user"></i></a>
+                <a href="#" class="icon-link"><i class="fas fa-heart"></i><span class="count">0</span></a>
+                <a href="#" class="icon-link"><i class="fas fa-shopping-bag"></i><span class="count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Shop</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Shop
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Content -->
+    <div class="shop-container">
+        <!-- Mobile Filter Toggle -->
+        <button class="filter-toggle">
+            <i class="fas fa-filter"></i> Filter Products
+        </button>
+        
+        <!-- Sidebar -->
+        <aside class="shop-sidebar">
+            <div class="filter-section">
+                <h3>Categories</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox"> Abayas</label>
+                    <label><input type="checkbox"> Dresses</label>
+                    <label><input type="checkbox"> Coats & Outerwear</label>
+                    <label><input type="checkbox"> Tops</label>
+                    <label><input type="checkbox"> Bottoms</label>
+                    <label><input type="checkbox"> Sets & Coordinates</label>
+                    <label><input type="checkbox"> Hijabs & Scarves</label>
+                    <label><input type="checkbox"> Accessories</label>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Collections</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox"> New Arrivals</label>
+                    <label><input type="checkbox"> Best Sellers</label>
+                    <label><input type="checkbox"> Essentials</label>
+                    <label><input type="checkbox"> Special Occasions</label>
+                    <label><input type="checkbox"> Sale</label>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Price Range</h3>
+                <div class="price-range">
+                    <input type="number" placeholder="Min" min="0">
+                    <span>to</span>
+                    <input type="number" placeholder="Max" min="0">
+                </div>
+                <button class="btn outline-btn" style="margin-top: 1rem; width: 100%;">Apply</button>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Colors</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox"> Black</label>
+                    <label><input type="checkbox"> White</label>
+                    <label><input type="checkbox"> Beige</label>
+                    <label><input type="checkbox"> Blue</label>
+                    <label><input type="checkbox"> Green</label>
+                    <label><input type="checkbox"> Pink</label>
+                    <label><input type="checkbox"> Purple</label>
+                    <label><input type="checkbox"> Red</label>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Size</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox"> XS</label>
+                    <label><input type="checkbox"> S</label>
+                    <label><input type="checkbox"> M</label>
+                    <label><input type="checkbox"> L</label>
+                    <label><input type="checkbox"> XL</label>
+                    <label><input type="checkbox"> XXL</label>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="shop-main">
+            <div class="shop-header">
+                <div class="shop-title">
+                    <h1>All Products</h1>
+                    <p>Showing 1-12 of 36 products</p>
+                </div>
+                <div class="shop-controls">
+                    <select class="sort-select">
+                        <option>Sort by popularity</option>
+                        <option>Sort by latest</option>
+                        <option>Sort by price: low to high</option>
+                        <option>Sort by price: high to low</option>
+                    </select>
+                    <div class="view-options">
+                        <div class="view-option" title="List View">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <div class="view-option" title="2 Columns">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <div class="view-option active" title="3 Columns">
+                            <i class="fas fa-th"></i>
+                        </div>
+                        <div class="view-option" title="4 Columns">
+                            <i class="fas fa-th-list"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/product-1.jpg" alt="Elegant Abaya">
+                        <div class="product-tags">
+                            <span class="tag new">New</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Abayas</span>
+                        <h3 class="product-name">Essential Everyday Abaya</h3>
+                        <span class="product-price">$85.00</span>
+                        <a href="#" class="btn secondary-btn">Select Options</a>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/product-2.jpg" alt="Modest Dress">
+                        <div class="product-tags">
+                            <span class="tag new">New</span>
+                            <span class="tag sale">Sale</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Dresses</span>
+                        <h3 class="product-name">Celestial Evening Dress</h3>
+                        <span class="product-price">$120.00</span>
+                        <a href="#" class="btn secondary-btn">Select Options</a>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/product-3.jpg" alt="Modest Coat">
+                        <div class="product-tags">
+                            <span class="tag new">New</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Coats</span>
+                        <h3 class="product-name">Timeless Coat - Teal</h3>
+                        <span class="product-price">$150.00</span>
+                        <a href="#" class="btn secondary-btn">Select Options</a>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/product-4.jpg" alt="Modest Top">
+                        <div class="product-tags">
+                            <span class="tag new">New</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Tops</span>
+                        <h3 class="product-name">Everyday Elegance Top</h3>
+                        <span class="product-price">$65.00</span>
+                        <a href="#" class="btn secondary-btn">Select Options</a>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/product-5.jpg" alt="Modest Skirt">
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Bottoms</span>
+                        <h3 class="product-name">Flowing Maxi Skirt</h3>
+                        <span class="product-price">$75.00</span>
+                        <a href="#" class="btn secondary-btn">Select Options</a>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/product-6.jpg" alt="Modest Set">
+                        <div class="product-tags">
+                            <span class="tag sale">Sale</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Sets</span>
+                        <h3 class="product-name">Coordinated Ensemble</h3>
+                        <span class="product-price"><del>$180.00</del> $145.00</span>
+                        <a href="#" class="btn secondary-btn">Select Options</a>
+                    </div>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/product-7.jpg" alt="Modest Hijab">
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Hijabs</span>
+                        <h3 class="product-name">Premium Cotton Hijab</h3>
+                        <span class="product-price">$35.00</span>
+                        <a href="#" class="btn secondary-btn">Select Options</a>
+                    </div>
+                </div>
+                
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/product-8.jpg" alt="Modest Accessory">
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Accessories</span>
+                        <h3 class="product-name">Elegant Hijab Pin Set</h3>
+                        <span class="product-price">$25.00</span>
+                        <a href="#" class="btn secondary-btn">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Product 9 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/product-9.jpg" alt="Modest Pants">
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Bottoms</span>
+                        <h3 class="product-name">Wide-Leg Trousers</h3>
+                        <span class="product-price">$85.00</span>
+                        <a href="#" class="btn secondary-btn">Select Options</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="pagination-item active">1</div>
+                <div class="pagination-item">2</div>
+                <div class="pagination-item">3</div>
+                <div class="pagination-item">4</div>
+                <div class="pagination-item"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Be the first to know about new collections, special offers, and styling tips</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Modesta</h3>
+                <p>Modesta is a premium modest fashion brand dedicated to creating elegant, contemporary clothing that respects traditional values while embracing modern style.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="shop.html">Shop All</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Sale Items</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@modesta.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fab fa-whatsapp"></i> WhatsApp: +1 (555) 987-6543</li>
+                </ul>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Modesta. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Filter toggle for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterToggle = document.querySelector('.filter-toggle');
+            const shopSidebar = document.querySelector('.shop-sidebar');
+            
+            if (filterToggle && shopSidebar) {
+                filterToggle.addEventListener('click', function() {
+                    shopSidebar.classList.toggle('active');
+                    this.textContent = shopSidebar.classList.contains('active') 
+                        ? '✕ Close Filters' 
+                        : '☰ Filter Products';
+                });
+            }
+            
+            // View options
+            const viewOptions = document.querySelectorAll('.view-option');
+            viewOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    viewOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // In a real implementation, this would change the product grid layout
+                    const productGrid = document.querySelector('.product-grid');
+                    if (productGrid) {
+                        // Remove existing column classes
+                        productGrid.classList.remove('two-columns', 'three-columns', 'four-columns', 'list-view');
+                        
+                        // Add new class based on selected view
+                        if (this.title === 'List View') {
+                            productGrid.classList.add('list-view');
+                        } else if (this.title === '2 Columns') {
+                            productGrid.classList.add('two-columns');
+                        } else if (this.title === '3 Columns') {
+                            productGrid.classList.add('three-columns');
+                        } else if (this.title === '4 Columns') {
+                            productGrid.classList.add('four-columns');
+                        }
+                    }
+                });
+            });
+            
+            // Pagination
+            const paginationItems = document.querySelectorAll('.pagination-item');
+            paginationItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    paginationItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // In a real implementation, this would load the next page of products
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
